@@ -5,7 +5,7 @@ from django.contrib.auth.models import AbstractUser
 
 
 class User(AbstractUser):
-    class GenderChoices(models.TextChoices):
+    class GenderChoices(models.TextChoices):  # 선택항목 칼럼을 만들 때 필요함함
         MALE = "male", "Male"
         FEMALE = "female", "Female"
 

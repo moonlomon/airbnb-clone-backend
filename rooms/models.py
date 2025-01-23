@@ -1,5 +1,5 @@
 from django.db import models
-from config import settings
+from config.settings import AUTH_USER_MODEL, AUTH_FOREIEGN_KEYS
 from common.models import CommonModel
 
 
@@ -21,6 +21,7 @@ class Room(CommonModel):
             "Shared Room",
         )
 
+    name = models.CharField(max_length=150, default="")
     country = models.CharField(
         max_length=50,
         default="한국",
@@ -44,12 +45,21 @@ class Room(CommonModel):
         choices=RoomKindChoices.choices,
     )
     owner = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
+        AUTH_USER_MODEL,
         on_delete=models.CASCADE,
     )
     amenities = models.ManyToManyField(
         "rooms.Amenity",
     )
+    category = models.ForeignKey(
+        AUTH_FOREIEGN_KEYS["Category"],
+        null=True,
+        blank=True,
+        on_delete=models.SET_NULL,
+    )
+
+    def __str__(self):
+        return self.name
 
 
 class Amenity(CommonModel):
@@ -61,4 +71,11 @@ class Amenity(CommonModel):
     description = models.TextField(
         max_length=150,
         default="",
+        blank=True,
     )
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name_plural = "Amenities"

@@ -14,7 +14,7 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name="Amenity",
+            name="Perk",
             fields=[
                 (
                     "id",
@@ -27,18 +27,16 @@ class Migration(migrations.Migration):
                 ),
                 ("create_at", models.DateTimeField(auto_now_add=True)),
                 ("update_at", models.DateTimeField(auto_now=True)),
-                ("name", models.CharField(max_length=150)),
-                (
-                    "description",
-                    models.TextField(blank=True, default="", max_length=150),
-                ),
+                ("name", models.CharField(max_length=250)),
+                ("detail", models.CharField(blank=True, default="", max_length=250)),
+                ("description", models.TextField(blank=True, null=True)),
             ],
             options={
-                "verbose_name_plural": "Amenities",
+                "abstract": False,
             },
         ),
         migrations.CreateModel(
-            name="Room",
+            name="Experience",
             fields=[
                 (
                     "id",
@@ -51,27 +49,14 @@ class Migration(migrations.Migration):
                 ),
                 ("create_at", models.DateTimeField(auto_now_add=True)),
                 ("update_at", models.DateTimeField(auto_now=True)),
-                ("name", models.CharField(default="", max_length=150)),
                 ("country", models.CharField(default="한국", max_length=50)),
                 ("city", models.CharField(default="서울", max_length=50)),
-                ("price", models.PositiveBigIntegerField()),
-                ("rooms", models.PositiveBigIntegerField()),
-                ("toilets", models.PositiveBigIntegerField()),
+                ("name", models.CharField(max_length=250)),
                 ("description", models.TextField()),
+                ("price", models.PositiveIntegerField()),
                 ("address", models.CharField(max_length=250)),
-                ("pets_friendly", models.BooleanField(default=True)),
-                (
-                    "kind",
-                    models.CharField(
-                        choices=[
-                            ("entire_place", "Entire Place"),
-                            ("private_room", "Private Room"),
-                            ("shared_room", "Shared Room"),
-                        ],
-                        max_length=20,
-                    ),
-                ),
-                ("amenities", models.ManyToManyField(to="rooms.amenity")),
+                ("start_at", models.TimeField()),
+                ("end_at", models.TimeField()),
                 (
                     "category",
                     models.ForeignKey(

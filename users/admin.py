@@ -4,7 +4,7 @@ from .models import User
 
 
 @admin.register(User)
-class CustomUserAdmin(UserAdmin):
+class CustomUserAdmin(UserAdmin):  # 유저 클래스만 admin을 UserAdmin을 상속.
     fieldsets = (
         (
             "Profile",

@@ -34,6 +34,9 @@ CUSTOM_APPS = [
     "users.apps.UsersConfig",
     "rooms.apps.RoomsConfig",
     "common.apps.CommonConfig",
+    "experience.apps.ExperienceConfig",
+    "categories.apps.CategoriesConfig",
+    "reviews.apps.ReviewsConfig",
 ]
 
 SYSTEM_APPS = [
@@ -131,3 +134,9 @@ STATIC_URL = "static/"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 AUTH_USER_MODEL = "users.User"
+
+AUTH_FOREIEGN_KEYS = {
+    "Category": "categories.Categories",
+    "Room": "rooms.Room",
+    "Experience": "experience.Experience",
+}

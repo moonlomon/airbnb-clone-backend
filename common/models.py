@@ -11,5 +11,5 @@ class CommonModel(models.Model):
         auto_now=True,
     )
 
-    class Meta:
+    class Meta:  # abstract : db에서 칼럼에 포함시키지 않게 하기, admin에도 안뜸뜸
         abstract = True
