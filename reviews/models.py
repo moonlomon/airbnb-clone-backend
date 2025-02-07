@@ -1,6 +1,7 @@
 from django.db import models
 from common.models import CommonModel
 from config.settings import AUTH_USER_MODEL, AUTH_FOREIEGN_KEYS
+from django.core.validators import MinValueValidator, MaxValueValidator
 
 
 # Create your models here.
@@ -27,10 +28,12 @@ class Reviews(CommonModel):
     )
 
     payload = models.TextField()
-    rating = models.PositiveIntegerField()
+    rating = models.PositiveIntegerField(
+        validators=[MinValueValidator(1), MaxValueValidator(10)]
+    )
 
     def __str__(self):
-        return f"{self.user} / {self.room}"
+        return f"{self.user} {self.room} (평점:{self.rating})"
 
     class Meta:
         verbose_name_plural = "Reviews"
